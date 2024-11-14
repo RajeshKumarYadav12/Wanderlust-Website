@@ -52,18 +52,7 @@ module.exports.createListing = async (req, res, next) => {
   await newListing.save();
   req.flash("success", "New Listing Created!");
   res.redirect("/listings");
-
-  // // Assign the logged-in user's ID to the owner field
-  // try {
-  //     await newListing.save();
-  //     req.flash("success", "New Listing Created!");
-  //     res.redirect("/listings");
-  // } catch (err) {
-  //     req.flash("error", "Failed to create listing. Please try again!");
-  //     res.redirect("/listings/new"); // Redirect back to the new form
-  // }
-};
-
+}
 
 module.exports.renderEditForm = async (req, res) => {
   let { id } = req.params;
