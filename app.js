@@ -2,7 +2,6 @@ if(process.env.NODE_ENV!="production"){
   require('dotenv').config();
 }
 
-
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -22,8 +21,6 @@ const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
 const dbUrl = process.env.ATLASDB_URL
-
-
 
 async function main() {
   await mongoose.connect(dbUrl);
@@ -86,6 +83,10 @@ app.use((req, res, next) => {
   next();
 });
 
+// Redirect root to /listings
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
 
 
 app.use("/listings", listingRouter);

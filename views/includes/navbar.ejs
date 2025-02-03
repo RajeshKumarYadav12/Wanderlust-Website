@@ -1,44 +1,196 @@
 <style>
+  /* Default Styles */
+.search-btn {
+  background-color: #fe424d;
+  color: #fff;
+  border-radius: 25px;
+  padding: 0 1rem;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  background-color: #d93c46;
+}
+
+.search-btn i {
+  display: inline;
+  margin-right: 0.5rem;
+}
+
+.search-input {
+  border-radius: 25px;
+  padding: 0.5rem 9rem 0.5rem 3rem;
+  font-size: 1rem;
+  margin-left: 200px;
+}
+
+.search-btn {
+  margin-left: 20px;
+}
+
+.navbar-toggler {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  z-index: 1100;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 200px;
+  height: 100vh;
+  background-color: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: right 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 20px;
+  z-index: 1050;
+}
+
+.sidebar.active {
+  right: 0;
+}
+
+.sidebar .nav-link {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  text-align: left;
+  color: black;
+  text-decoration: none;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #f5f5f5;
+}
+
+.close-btn {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-bottom: 15px;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Large Screens (1024px and above) */
+@media (min-width: 1024px) {
+  .navbar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .search-input, .search-btn {
+    width: auto;
+  }
+}
+
+/* Medium Screens (768px and below) */
+@media (max-width: 768px) {
+  .Explore, .navbar-nav.ms-auto {
+    display: none;
+  }
+  .navbar-nav {
+    flex-direction: column;
+    text-align: end;
+  }
+  .navbar-nav .nav-link {
+    padding: 10px;
+  }
+  .search-container {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .search-input {
+    width: 50%;
+    padding: 0.5rem;
+    margin-left: 40px;
+    margin-top: 5px;
+  }
   .search-btn {
-    background-color: #fe424d;
-    color: #fff;    border-radius: 25px;
-    padding: 0 1rem 0 1rem;
+    width: 25%;
+    padding: 0.5rem 1.8rem;
+    margin-left: 320px;
+    margin-top: -40px;
+    margin-right: 30px;
   }
-  .search-btn:hover {
-    background-color: #fe424d;
-    color: #fff;
-  }
-  .search-btn i {
-    display: inline;
-    margin-right: 0.5rem;
-  }
+}
 
-  .search-input{
-    border-radius: 25px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
-    font-size: 1rem;
+/* Small Screens (576px and below) */
+@media (max-width: 576px) {
+  .Explore {
+    display: none;
   }
+  .search-input {
+    width: 80%;
+    padding: 0.5rem;
+    
+  }
+  .search-btn {
+    display: none;
+  }
+}
 
+@media (max-width: 400px) {
+  .search-input {
+    width: 50%;
+    
+  }
+}
+@media (max-width: 315px) {
+  .search-input {
+    width: 50%;
+    margin-top: -42px;
+  }
+}
 </style>
 
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass"></i></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="/listings">
+      <i class="fa-solid fa-compass"></i>
+    </a>
+
+    <div class=" Explore">
+      <a class="nav-link" href="/listings">Explore</a>
+    </div> 
+    
+    <div class=" mx-auto">
+      <form class="d-flex flex-column flex-md-row " role="search">
+        <input class="form-control me-2 search-input" type="search" placeholder="Search destinations" aria-label="Search">
+        <button class="btn search-btn" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i> Search
+        </button>
+      </form>
+    </div>
+
+    <!-- Sidebar Toggle Button -->
+    <button class="navbar-toggler" id="sidebarToggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" 
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/listings">Explore</a>
-        
-      </div> 
-      <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search">
-          <input class="form-control me-2 search-input" type="search" placeholder="Search destinations" aria-label="Search">
-          <button class="btn search-btn" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>Search</button>
-        </form>
-      </div>
+      <!-- Extra Bring-->
+    
       <div class="navbar-nav ms-auto">
         <a class="nav-link" href="/listings/new">Airbnb your home</a>
         <% if (!currUser) { %>
@@ -48,6 +200,30 @@
           <a class="nav-link ms-3" href="/logout">Log Out</a>
         <% } %>
       </div>
+
     </div>
   </div>
 </nav>
+
+<!-- Sidebar for Mobile -->
+<div class="sidebar" id="sidebar">
+  <button class="close-btn" id="closeSidebar">&times;</button>
+  <a class="nav-link" href="/listings/new">Airbnb your home</a>
+  <% if (!currUser) { %>
+    <a class="nav-link" href="/signup"><b>Sign Up</b></a>
+    <a class="nav-link" href="/login"><b>Log In</b></a>
+  <% } else { %>
+    <a class="nav-link" href="/logout">Log Out</a>
+  <% } %>
+</div>
+
+<script>
+  document.getElementById("sidebarToggle").addEventListener("click", function() {
+    document.getElementById("sidebar").classList.add("active");
+  });
+
+  document.getElementById("closeSidebar").addEventListener("click", function() {
+    document.getElementById("sidebar").classList.remove("active");
+  });
+</script>
+

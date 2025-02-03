@@ -7,7 +7,6 @@
         zoom: 8 // starting zoom
     });
 
-
     const marker = new mapboxgl.Marker({color: "red"})
     .setLngLat(listing.geometry.coordinates) //Listing.geometry.
     .setPopup(
